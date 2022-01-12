@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class MyMain {
 
     // Returns the number of odd numbers in mat
@@ -52,7 +54,12 @@ public class MyMain {
     // where each value is each to the sum of its row and col indexes
     public static int[][] arrayBuilder(int arraySize) {
         int[][] arv = new int[arraySize][arraySize];
-        return null;
+        for (int x = 0; x < arraySize; x ++) {
+            for (int y = 0; y < arraySize; y ++) {
+                arv[x][y] = x+y;
+            }
+        }
+        return arv;
     }
 
 
@@ -68,23 +75,54 @@ public class MyMain {
 
     // Returns the mean of the 2D array mat
     public static double mean(double[][] mat) {
-        // YOUR CODE HERE
-        return -1.0;
+        double summary = 0;
+        for (int x = 0; x < mat.length; x ++) {
+            for (int y = 0; y < mat.length; y ++) {
+                summary += mat[x][y];
+            }
+        }
+        return summary/(mat.length*mat[0].length);
     }
 
     // Returns the median of the 2D array mat
     // Remember that the array is sorted!
     public static double median(double[][] mat) {
-        // YOUR CODE HERE
-        return -1.0;
+        ArrayList<Double> newtab = new ArrayList<Double>();
+        for (int x = 0; x < mat.length; x ++) {
+            for (int y = 0; y < mat[0].length; y ++) {
+                newtab.add(mat[x][y]);
+            }
+        }
+        if (newtab.size() % 2 == 0) {
+            return (newtab.get((int) (newtab.size()/2-0.5)) + newtab.get((int) (newtab.size()/2+0.5))) / 2;
+        } else {
+            return newtab.get(newtab.size()/2);
+        }
     }
 
 
     // Returns the mode of the 2D array mat
     // Remember that the array is sorted!
     public static double mode(double[][] mat) {
-        // YOUR CODE HERE
-        return -1.0;
+        int maxnum = 0;
+        double num = 0;
+        for (int x = 0; x < mat.length; x++) {
+            for (int y = 0; y < mat[0].length; y++) {
+                int times = 0;
+                for (int z = 0; z < mat.length; z++) {
+                    for (int w = 0; w < mat[0].length; w++) {
+                        if (mat[x][y] == mat[z][w]) {
+                            times ++;
+                        }
+                    }
+                }
+                if (times > maxnum) {
+                    maxnum = times;
+                    num = mat[x][y];
+                }
+            }
+        }
+        return num;
     }
 
 
